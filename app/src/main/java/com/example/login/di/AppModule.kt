@@ -19,22 +19,13 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    @Provides
-    @Singleton
-    fun provideAccountRepository(): AccountRepository {
-        return AccountRepository
-    }
 
-    //IMPLEMENTAR PARA INTERNACIONALIZAR STRINGS
     @Provides
     @Singleton
     fun provideStringResources(@ApplicationContext context: Context): Resources {
         return context.resources
     }
 
-    /**
-     * Método que provee el DataStore (api-valor) de la sessión
-     */
     @Singleton
     @Provides
     fun provideSessionDataStore(@ApplicationContext context: Context): DataStore<Preferences> {

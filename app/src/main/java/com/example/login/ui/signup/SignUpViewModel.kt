@@ -28,25 +28,36 @@ class SignUpViewModel @Inject constructor(
     }
 
     fun registerAccount(): Boolean {
-        if (email.value.isNotEmpty() && password.value.isNotEmpty()) {
-            // Verifica si el usuario ya existe
-            if (repository.accountExists(email.value)) {
-                state.value = SignUpState(errorMessage = "Este usuario ya existe.")
-                return false
-            }
-
-            // Registrar la cuenta
-            repository.addAccount(Account(username = email.value, password = password.value))
-
-            state.value = SignUpState(errorMessage = null)
-            return true
-        } else {
+        if (email.value.isEmpty() || password.value.isEmpty()) {
             state.value = SignUpState(errorMessage = "Todos los campos son obligatorios")
             return false
         }
+
+        if (!isValidEmail(email.value)) {
+            state.value = SignUpState(errorMessage = "El correo electrónico no es válido")
+            return false
+        }
+
+        if (password.value.length < 5) {
+            state.value = SignUpState(errorMessage = "La contraseña debe tener más de 5 caracteres")
+            return false
+        }
+
+        if (repository.accountExists(email.value)) {
+            state.value = SignUpState(errorMessage = "Este usuario ya existe.")
+            return false
+        }
+
+        repository.addAccount(Account(username = email.value, password = password.value))
+        state.value = SignUpState(errorMessage = null)
+        return true
     }
 
     fun getLastRegisteredCredentials(): Pair<String, String> {
         return Pair(email.value, password.value)
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

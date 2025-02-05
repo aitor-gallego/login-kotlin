@@ -47,7 +47,7 @@ fun SignUpScreen(
             color = MaterialTheme.colorScheme.primary
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(18.dp))
 
         BasicTextField(
             value = email,
@@ -72,8 +72,6 @@ fun SignUpScreen(
                 imeAction = ImeAction.Next
             )
         )
-
-        Spacer(modifier = Modifier.height(16.dp))
 
         BasicTextField(
             value = password,
@@ -100,7 +98,7 @@ fun SignUpScreen(
             visualTransformation = PasswordVisualTransformation()
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         Button(
             onClick = {
@@ -116,7 +114,7 @@ fun SignUpScreen(
             Text("Registrarse", color = Color.White)
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         TextButton(
             onClick = { goUp("", "") },

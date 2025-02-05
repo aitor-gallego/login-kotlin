@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.login.data.repository.AccountRepository
+import com.example.login.di.Session
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -13,6 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
+    private val session: Session,
     private val accountRepository: AccountRepository
 ) : ViewModel() {
 
@@ -46,8 +48,11 @@ class LoginViewModel @Inject constructor(
             return
         }
 
-        state = currentState.copy(isLoading = true, errorMessage = null)
+        viewModelScope.launch {
+            session.saveUserSession(state.email, state.password, true)
+        }
 
+        state = currentState.copy(isLoading = true, errorMessage = null)
         viewModelScope.launch {
             delay(2000)
             state = currentState.copy(isLoading = false)

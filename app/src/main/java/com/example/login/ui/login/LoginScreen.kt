@@ -10,6 +10,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,11 +30,10 @@ fun LoginScreen(
     goToSignUp: () -> Unit,
     goToAccountList: () -> Unit
 ) {
-    viewModel.onArgsNav(email, password)
-
-    if (email.isNotEmpty() && password.isNotEmpty())
+    LaunchedEffect(email, password) {
+        if (email.isNotEmpty() && password.isNotEmpty())
         viewModel.onArgsNav(email, password)
-
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -48,7 +48,7 @@ fun LoginScreen(
             color = MaterialTheme.colorScheme.primary
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(18.dp))
 
         BasicTextField(
             value = viewModel.state.email,
@@ -80,9 +80,6 @@ fun LoginScreen(
                 imeAction = ImeAction.Next
             )
         )
-
-
-        Spacer(modifier = Modifier.height(16.dp))
 
         BasicTextField(
             value = viewModel.state.password,
@@ -116,7 +113,7 @@ fun LoginScreen(
             visualTransformation = PasswordVisualTransformation()
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         Button(
             onClick = {
@@ -133,7 +130,7 @@ fun LoginScreen(
             Text("Iniciar Sesión", color = Color.White)
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         Button(
             onClick = goToSignUp,

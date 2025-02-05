@@ -1,9 +1,9 @@
-package com.example.login.ui.home
+package com.example.login.ui.main
 
 import com.example.login.navigation.HomeGraph
 import com.example.login.navigation.LoginGraph
 
-data class HomeState(
+data class MainState(
     val activeAccount: Boolean
 ) {
     fun startDestination(): String {

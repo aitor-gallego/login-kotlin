@@ -17,7 +17,7 @@ object HomeGraph {
 fun NavGraphBuilder.homeGraph(
     navController: NavController,
 ) {
-    navigation(startDestination = HomeGraph.listAccount(), route = LoginGraph.ROUTE) {
+    navigation(startDestination = HomeGraph.listAccount(), route = HomeGraph.ROUTE) {
         listAccount(navController)
     }
 }
@@ -26,9 +26,10 @@ private fun NavGraphBuilder.listAccount(
     navController: NavController
 ) {
     composable(route = HomeGraph.listAccount()) {
-        val listAccountVM: ListAccountViewModel = hiltViewModel()
+        val listAccountViewModel: ListAccountViewModel = hiltViewModel()
         ListAccountScreen(
-            viewModel = listAccountVM,
+            viewModel = listAccountViewModel,
+            goBack = { navController.popBackStack() }
         )
     }
 }

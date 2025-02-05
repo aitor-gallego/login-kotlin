@@ -58,7 +58,9 @@ private fun NavGraphBuilder.signUp(navController: NavController) {
         SignUpScreen(
             viewModel = signUpVM,
             goUp = { email, password ->
-                navController.navigate(LoginGraph.login().replace("{email}", email).replace("{password}", password))
+                navController.navigate(
+                    LoginGraph.login().replace("{email}", email).replace("{password}", password)
+                )
             }
         )
     }
