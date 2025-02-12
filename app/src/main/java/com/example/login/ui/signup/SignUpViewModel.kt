@@ -48,7 +48,7 @@ class SignUpViewModel @Inject constructor(
             return false
         }
 
-        repository.addAccount(Account(username = email.value, password = password.value))
+        repository.addAccount(Account(email = email.value, password = password.value))
         state.value = SignUpState(errorMessage = null)
         return true
     }

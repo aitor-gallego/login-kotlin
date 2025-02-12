@@ -9,13 +9,13 @@ class AccountRepository @Inject constructor() {
     private var accounts = mutableListOf<Account>()
 
     init {
-        accounts.add(Account(username = "usuario1@gmail.com", password = "12345"))
-        accounts.add(Account(username = "usuario2@gmail.com", password = "12345"))
-        accounts.add(Account(username = "prueba@gmail.com", password = "12345"))
+        accounts.add(Account(email = "usuario1@gmail.com", password = "12345"))
+        accounts.add(Account(email = "usuario2@gmail.com", password = "12345"))
+        accounts.add(Account(email = "prueba@gmail.com", password = "12345"))
     }
 
     fun addAccount(account: Account) {
-        if (accounts.none { it.username == account.username }) {
+        if (accounts.none { it.email == account.email }) {
             accounts.add(account)
         }
     }
@@ -23,10 +23,14 @@ class AccountRepository @Inject constructor() {
     fun getAccounts(): List<Account> = accounts.toList()
 
     fun accountExists(username: String): Boolean {
-        return accounts.any { it.username == username }
+        return accounts.any { it.email == username }
     }
 
     fun getAccount(username: String): Account? {
-        return accounts.find { it.username == username }
+        return accounts.find { it.email == username }
+    }
+
+    fun deleteAccount(account: Account): Boolean {
+        return accounts.removeIf { it.email == account.email }
     }
 }

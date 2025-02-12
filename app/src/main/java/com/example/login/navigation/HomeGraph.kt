@@ -29,7 +29,9 @@ private fun NavGraphBuilder.listAccount(
         val listAccountViewModel: ListAccountViewModel = hiltViewModel()
         ListAccountScreen(
             viewModel = listAccountViewModel,
-            goBack = { navController.popBackStack() }
+            goToCreation = {},
+            goToDetail = {},
+            openDrawer = {}
         )
     }
 }

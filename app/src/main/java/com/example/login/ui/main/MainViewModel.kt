@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(
     private fun verifier() {
         viewModelScope.launch {
             session.isUserLoggedIn().collect { isLoggedIn ->
-                state = state.copy(activeAccount = isLoggedIn)
+                state = MainState(activeAccount = isLoggedIn)
             }
         }
     }

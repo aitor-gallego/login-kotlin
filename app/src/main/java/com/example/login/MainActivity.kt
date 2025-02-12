@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Surface
 import androidx.navigation.compose.rememberNavController
-import com.example.login.ui.main.HomeScreen
+import com.example.login.ui.main.MainScreen
 import com.example.login.ui.theme.LoginTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,9 +18,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             LoginTheme {
-                Surface {
-                    HomeScreen(navController)
-                }
+                MainScreen(navController)
             }
         }
     }
